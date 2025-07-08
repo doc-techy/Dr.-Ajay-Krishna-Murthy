@@ -227,7 +227,7 @@ export default function SpecializationsSection() {
         </div>
         
         {/* Call to Action */}
-        <div className="mt-20 text-center">
+        {/* <div className="mt-20 text-center">
           <div className="max-w-3xl mx-auto">
             <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
               Ready to Experience Expert Care?
@@ -245,7 +245,7 @@ export default function SpecializationsSection() {
               </button>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
 
       {/* Custom CSS for hiding scrollbar */}

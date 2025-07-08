@@ -1,0 +1,92 @@
+{
+  "environments": {
+    "development": {
+      "backend": {
+        "url": "http://localhost:8000",
+        "apiVersion": "v1",
+        "timeout": 30000
+      },
+      "database": {
+        "engine": "postgresql",
+        "name": "ajay_db",
+        "host": "localhost",
+        "port": 5432,
+        "user": "dietailor_admin",
+        "password": "dietailor2025"
+      },
+      "frontend": {
+        "url": "http://localhost:3000",
+        "port": 3000
+      },
+      "app": {
+        "name": "Dr. Ajay Krishna Murthy - Medical Practice (Dev)",
+        "version": "1.0.0-dev",
+        "debug": true,
+        "logLevel": "debug"
+      },
+      "contact": {
+        "email": "dev@drajay.com",
+        "phone": "+91-1234567890",
+        "address": "Development Address, City, State, PIN",
+        "emergencyPhone": "+91-0987654321"
+      },
+      "security": {
+        "corsOrigins": ["http://localhost:3000", "http://127.0.0.1:3000"],
+        "httpsRedirect": false,
+        "sessionTimeout": 3600
+      },
+      "admin": {
+        "username": "admin",
+        "password": "admin123"
+      }
+    },
+    "production": {
+      "backend": {
+        "url": "http://65.0.97.115",
+        "apiVersion": "v1",
+        "timeout": 30000
+      },
+      "database": {
+        "engine": "postgresql",
+        "name": "ajay_db",
+        "host": "localhost",
+        "port": 5432,
+        "user": "dietailor_admin",
+        "password": "dietailor2025"
+      },
+      "frontend": {
+        "url": "http://65.0.97.115:3000",
+        "port": 3000
+      },
+      "app": {
+        "name": "Dr. Ajay Krishna Murthy - Medical Practice",
+        "version": "1.0.0",
+        "debug": false,
+        "logLevel": "error"
+      },
+      "contact": {
+        "email": "info@drajay.com",
+        "phone": "+91-XXXXXXXXXX",
+        "address": "Your Clinic Address, City, State, PIN",
+        "emergencyPhone": "+91-XXXXXXXXXX"
+      },
+      "security": {
+        "corsOrigins": ["http://65.0.97.115:3000", "http://65.0.97.115"],
+        "httpsRedirect": false,
+        "sessionTimeout": 3600
+      },
+      "admin": {
+        "username": "admin",
+        "password": "admin123"
+      }
+    }
+  },
+  "businessHours": "Mon-Fri: 9:00 AM - 6:00 PM, Sat: 9:00 AM - 2:00 PM",
+  "features": {
+    "appointments": true,
+    "onlineBooking": true,
+    "emailNotifications": true,
+    "smsNotifications": false,
+    "adminAuth": true
+  }
+} 

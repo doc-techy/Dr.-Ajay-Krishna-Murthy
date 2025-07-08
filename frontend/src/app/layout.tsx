@@ -1,20 +1,26 @@
-import type { Metadata } from "next";
-import "./globals.css";
+import type { Metadata } from 'next';
+import { Inter } from 'next/font/google';
+import './globals.css';
+import { AuthProvider } from '@/components/AuthProvider';
+
+const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: "Dr. Ajay Krishna Murthy - Oculoplasty Specialist | Bangalore",
-  description: "Dr. Ajay Krishna Murthy - MS Ophthalmology specialist in Oculoplasty from JIPMER, Pondicherry. Expert in eyelid surgery, orbital surgery, and aesthetic procedures in Bangalore.",
+  title: 'Dr. Ajay Krishna Murthy - Medical Practice',
+  description: 'Professional medical practice website',
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="en">
-      <body>
-        {children}
+      <body className={inter.className}>
+        <AuthProvider>
+          {children}
+        </AuthProvider>
       </body>
     </html>
   );
