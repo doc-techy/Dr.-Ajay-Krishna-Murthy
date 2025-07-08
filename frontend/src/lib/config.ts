@@ -50,11 +50,11 @@ export const config = {
 // Helper function to get config values
 export function getConfig<T>(path: string): T | undefined {
   const keys = path.split('.');
-  let result: any = config;
+  let result: unknown = config;
   
   for (const key of keys) {
     if (result && typeof result === 'object' && key in result) {
-      result = result[key];
+      result = (result as Record<string, unknown>)[key];
     } else {
       return undefined;
     }
