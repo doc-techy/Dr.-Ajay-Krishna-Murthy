@@ -47,9 +47,10 @@ else:
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = ENV_CONFIG['app']['debug']
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '0.0.0.0']
+# ALLOWED_HOSTS - Updated for production domain
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '0.0.0.0', '65.0.97.115']
 if APP_ENVIRONMENT == 'production':
-    ALLOWED_HOSTS.extend(['your-domain.com', 'www.your-domain.com'])
+    ALLOWED_HOSTS.extend(['oculoplastix.in', 'www.oculoplastix.in'])
 
 # Application definition
 
@@ -165,9 +166,13 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# CORS settings for frontend integration
+# CORS settings for frontend integration - Updated for Vercel deployment
 CORS_ALLOWED_ORIGINS = ENV_CONFIG['security']['corsOrigins']
 CORS_ALLOW_CREDENTIALS = True
+
+# CSRF settings for Vercel domain
+if APP_ENVIRONMENT == 'production':
+    CSRF_TRUSTED_ORIGINS = ['https://oculoplastix.in', 'https://www.oculoplastix.in']
 
 # Security settings for production
 if APP_ENVIRONMENT == 'production':

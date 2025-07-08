@@ -42,7 +42,7 @@
     },
     "production": {
       "backend": {
-        "url": "http://65.0.97.115",
+        "url": "https://oculoplastix.in",
         "apiVersion": "v1",
         "timeout": 30000
       },
@@ -55,7 +55,7 @@
         "password": "dietailor2025"
       },
       "frontend": {
-        "url": "http://65.0.97.115:3000",
+        "url": "https://oculoplastix.in",
         "port": 3000
       },
       "app": {
@@ -65,14 +65,14 @@
         "logLevel": "error"
       },
       "contact": {
-        "email": "info@drajay.com",
+        "email": "info@oculoplastix.in",
         "phone": "+91-XXXXXXXXXX",
         "address": "Your Clinic Address, City, State, PIN",
         "emergencyPhone": "+91-XXXXXXXXXX"
       },
       "security": {
-        "corsOrigins": ["http://65.0.97.115:3000", "http://65.0.97.115"],
-        "httpsRedirect": false,
+        "corsOrigins": ["https://oculoplastix.in"],
+        "httpsRedirect": true,
         "sessionTimeout": 3600
       },
       "admin": {

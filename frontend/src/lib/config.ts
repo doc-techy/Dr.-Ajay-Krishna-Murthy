@@ -18,34 +18,33 @@ function getCurrentEnvironment(): 'development' | 'production' {
   }
 }
 
-const environment = getCurrentEnvironment();
-const envConfig = appConfig.environments[environment];
-
-// Export configuration
-export const config = {
-  environment,
-  backend: {
-    url: envConfig.backend.url,
-    apiVersion: envConfig.backend.apiVersion,
-    timeout: envConfig.backend.timeout,
-    apiUrl: `${envConfig.backend.url}/api/${envConfig.backend.apiVersion}`,
+// Configuration for different environments
+const config = {
+  development: {
+    backendUrl: 'http://localhost:8000',
+    apiVersion: 'v1',
+    timeout: 30000,
   },
-  app: {
-    name: envConfig.app.name,
-    version: envConfig.app.version,
-    debug: envConfig.app.debug,
-    logLevel: envConfig.app.logLevel,
+  production: {
+    backendUrl: 'http://65.0.97.115', // EC2 backend server on port 80
+    apiVersion: 'v1',
+    timeout: 30000,
   },
-  contact: {
-    email: envConfig.contact.email,
-    phone: envConfig.contact.phone,
-    address: envConfig.contact.address,
-    emergencyPhone: envConfig.contact.emergencyPhone,
-  },
-  businessHours: appConfig.businessHours,
-  features: appConfig.features,
-  security: envConfig.security,
 };
+
+// Determine environment
+const environment = process.env.NODE_ENV === 'production' ? 'production' : 'development';
+
+export const API_CONFIG = config[environment];
+
+// API endpoint builders
+export const API_ENDPOINTS = {
+  appointments: `${API_CONFIG.backendUrl}/api/${API_CONFIG.apiVersion}/appointments`,
+  stats: `${API_CONFIG.backendUrl}/api/${API_CONFIG.apiVersion}/appointments/stats`,
+  auth: `${API_CONFIG.backendUrl}/api/${API_CONFIG.apiVersion}/auth`,
+} as const;
+
+export default API_CONFIG;
 
 // Helper function to get config values
 export function getConfig<T>(path: string): T | undefined {
