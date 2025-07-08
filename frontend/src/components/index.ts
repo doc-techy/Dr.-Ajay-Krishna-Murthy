@@ -11,4 +11,6 @@ export { default as ContactSection } from './ContactSection';
 export { default as ProfessionalExperience } from './ProfessionalExperience';
 export { default as ProfessionalMemberships } from './ProfessionalMemberships';
 export { default as AcademicContributions } from './AcademicContributions';
-export { default as AdminDashboard } from './AdminDashboard'; 
+export { default as AdminDashboard } from './AdminDashboard';
+export { AuthProvider, useAuth } from './AuthProvider';
+export { ProtectedRoute } from './ProtectedRoute'; 

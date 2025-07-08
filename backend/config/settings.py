@@ -10,23 +10,46 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
+import os
+import json
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Load main configuration
+CONFIG_PATH = BASE_DIR.parent / 'app.config.json'
+ENV_FILE = BASE_DIR.parent / 'config.env'
+
+# Read environment from config.env
+APP_ENVIRONMENT = 'development'
+if ENV_FILE.exists():
+    with open(ENV_FILE, 'r') as f:
+        for line in f:
+            if line.startswith('APP_ENVIRONMENT='):
+                APP_ENVIRONMENT = line.strip().split('=')[1]
+                break
+
+# Load configuration
+with open(CONFIG_PATH, 'r') as f:
+    CONFIG = json.load(f)
+    ENV_CONFIG = CONFIG['environments'][APP_ENVIRONMENT]
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-&7%vt$n_hgv8pzqo@2!823uthj5^qf#@7ofmo(61ayj%2uh^r!'
+if APP_ENVIRONMENT == 'production':
+    SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'CHANGE_THIS_IN_PRODUCTION')
+else:
+    SECRET_KEY = 'django-insecure-&7%vt$n_hgv8pzqo@2!823uthj5^qf#@7ofmo(61ayj%2uh^r!'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = ENV_CONFIG['app']['debug']
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '0.0.0.0']
+if APP_ENVIRONMENT == 'production':
+    ALLOWED_HOSTS.extend(['your-domain.com', 'www.your-domain.com'])
 
 # Application definition
 
@@ -75,16 +98,25 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'ajay_db',
-        'USER': 'dietailor_admin',
-        'PASSWORD': 'dietailor2025',
-        'HOST': 'localhost',
-        'PORT': '5432',
+db_config = ENV_CONFIG['database']
+if db_config['engine'] == 'sqlite':
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / db_config['name'],
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': db_config['name'],
+            'USER': db_config['user'],
+            'PASSWORD': db_config['password'],
+            'HOST': db_config['host'],
+            'PORT': db_config['port'],
+        }
+    }
 
 
 # Password validation
@@ -111,7 +143,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Kolkata'
 
 USE_I18N = True
 
@@ -122,6 +154,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+# Media files
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
@@ -129,12 +166,22 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # CORS settings for frontend integration
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",
-    "http://127.0.0.1:3000",
-    "http://localhost:3001",
-    "http://127.0.0.1:3001",
-    "http://192.168.29.189:3001",
-]
-
+CORS_ALLOWED_ORIGINS = ENV_CONFIG['security']['corsOrigins']
 CORS_ALLOW_CREDENTIALS = True
+
+# Security settings for production
+if APP_ENVIRONMENT == 'production':
+    SECURE_SSL_REDIRECT = ENV_CONFIG['security']['httpsRedirect']
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+    SECURE_HSTS_SECONDS = 31536000
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_HSTS_PRELOAD = True
+    SECURE_CONTENT_TYPE_NOSNIFF = True
+    SECURE_BROWSER_XSS_FILTER = True
+    X_FRAME_OPTIONS = 'DENY'
+    SESSION_COOKIE_SECURE = True
+    SESSION_COOKIE_HTTPONLY = True
+    SESSION_COOKIE_SAMESITE = 'Strict'
+
+# Session configuration
+SESSION_COOKIE_AGE = ENV_CONFIG['security']['sessionTimeout']

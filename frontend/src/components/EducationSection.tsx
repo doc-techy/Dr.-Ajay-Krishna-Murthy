@@ -23,7 +23,7 @@ export default function EducationSection() {
     {
       degree: "MBBS",
       institution: "A.J Hospital and Research Centre",
-      location: "Puducherry, India",
+      location: "Mangalore, India",
       year: "2014",
       description: "Bachelor of Medicine and Bachelor of Surgery with distinction",
       icon: "🎓",

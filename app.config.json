@@ -1,0 +1,94 @@
+{
+  "environments": {
+    "development": {
+      "backend": {
+        "url": "http://localhost:8000",
+        "apiVersion": "v1",
+        "timeout": 30000
+      },
+      "database": {
+        "engine": "sqlite",
+        "name": "db.sqlite3",
+        "host": "localhost",
+        "port": null,
+        "user": null,
+        "password": null
+      },
+      "frontend": {
+        "url": "http://localhost:3000",
+        "port": 3000
+      },
+      "app": {
+        "name": "Dr. Ajay Krishna Murthy - Medical Practice (Dev)",
+        "version": "1.0.0-dev",
+        "debug": true,
+        "logLevel": "debug"
+      },
+      "contact": {
+        "email": "dev@drajay.com",
+        "phone": "+91-1234567890",
+        "address": "Development Address, City, State, PIN",
+        "emergencyPhone": "+91-0987654321"
+      },
+      "security": {
+        "corsOrigins": ["http://localhost:3000", "http://127.0.0.1:3000"],
+        "httpsRedirect": false,
+        "sessionTimeout": 3600
+      },
+      "admin": {
+        "username": "admin",
+        "password": "admin123",
+        "note": "Change these credentials in production!"
+      }
+    },
+    "production": {
+      "backend": {
+        "url": "https://api.your-domain.com",
+        "apiVersion": "v1",
+        "timeout": 30000
+      },
+      "database": {
+        "engine": "postgresql",
+        "name": "dr_ajay_production",
+        "host": "your-db-host.com",
+        "port": 5432,
+        "user": "production_user",
+        "password": "UPDATE_WITH_SECURE_PASSWORD"
+      },
+      "frontend": {
+        "url": "https://www.your-domain.com",
+        "port": 443
+      },
+      "app": {
+        "name": "Dr. Ajay Krishna Murthy - Medical Practice",
+        "version": "1.0.0",
+        "debug": false,
+        "logLevel": "error"
+      },
+      "contact": {
+        "email": "info@drajay.com",
+        "phone": "+91-XXXXXXXXXX",
+        "address": "Your Clinic Address, City, State, PIN",
+        "emergencyPhone": "+91-XXXXXXXXXX"
+      },
+      "security": {
+        "corsOrigins": ["https://www.your-domain.com", "https://your-domain.com"],
+        "httpsRedirect": true,
+        "sessionTimeout": 3600
+      },
+      "admin": {
+        "username": "CHANGE_THIS_USERNAME",
+        "password": "CHANGE_THIS_SECURE_PASSWORD",
+        "note": "IMPORTANT: Use strong credentials and implement proper authentication!"
+      }
+    }
+  },
+  "businessHours": "Mon-Fri: 9:00 AM - 6:00 PM, Sat: 9:00 AM - 2:00 PM",
+  "features": {
+    "appointments": true,
+    "onlineBooking": true,
+    "emailNotifications": true,
+    "smsNotifications": false,
+    "adminAuth": true
+  }
+} 

@@ -1,378 +1,285 @@
-# Dr. Ajay Medical Practice Management System
+# Dr. Ajay Krishna Murthy - Medical Practice Website
 
-A professional medical practice management system built with Next.js (frontend) and Django/FastAPI (backend).
+A modern, professional medical practice website built with Django (backend) and Next.js (frontend), designed for Dr. Ajay Krishna Murthy's medical practice.
 
 ## 🏥 Features
 
-- **Patient Management**: Store and manage patient information
-- **Appointment Booking**: Online appointment scheduling system
-- **Admin Dashboard**: Comprehensive appointment management
-- **Responsive Design**: Mobile-friendly interface
-- **Real-time Updates**: Live appointment status updates
-- **Email Notifications**: Automated appointment confirmations
-- **Secure Authentication**: JWT-based authentication system
+- **Professional Medical Website**: Complete practice information and services
+- **Appointment Management**: Backend API for appointment booking
+- **Responsive Design**: Mobile-first, modern UI
+- **Admin Dashboard**: Django admin for content management
+- **Production Ready**: Secure, scalable architecture
+
+## 🛠️ Technology Stack
+
+### Backend (Django)
+- Python 3.x
+- Django 5.2.4
+- PostgreSQL (Production) / SQLite (Development)
+- Django REST Framework ready
+- CORS headers for frontend integration
+
+### Frontend (Next.js)
+- React 19
+- Next.js 15.3.4
+- TypeScript
+- Tailwind CSS
+- Modern responsive design
 
 ## 🚀 Quick Start
 
 ### Prerequisites
-
-- Node.js 18+ and npm
 - Python 3.8+
-- PostgreSQL 12+
-- Git
+- Node.js 18+
+- npm or yarn
+- PostgreSQL (for production)
 
-### Installation
+### 🔧 Automated Setup
 
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/yourusername/dr_ajay.git
-   cd dr_ajay
-   ```
+Use the deployment script for quick setup:
 
-2. **Frontend Setup**
-   ```bash
-   cd frontend
-   npm install
-   cp env.template .env.local
-   # Edit .env.local with your configuration
-   npm run dev
-   ```
+```bash
+# For development
+chmod +x deploy.sh
+./deploy.sh development
 
-3. **Backend Setup**
+# For production
+./deploy.sh production
+```
+
+### 📝 Manual Setup
+
+#### Backend Setup
+
+1. **Navigate to backend directory**
    ```bash
    cd backend
-   python -m venv venv
-   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   ```
+
+2. **Create virtual environment**
+   ```bash
+   python3 -m venv venv_prod
+   source venv_prod/bin/activate
+   ```
+
+3. **Install dependencies**
+   ```bash
    pip install -r requirements.txt
-   cp env.template .env
-   # Edit .env with your configuration
+   ```
+
+4. **Environment configuration**
+   ```bash
+   # For development
+   cp env.development .env
+   
+   # For production
+   cp env.production .env
+   # Then update .env with your production values
+   ```
+
+5. **Database setup**
+   ```bash
    python manage.py migrate
+   ```
+
+6. **Create superuser (production)**
+   ```bash
+   python manage.py createsuperuser
+   ```
+
+7. **Run development server**
+   ```bash
    python manage.py runserver
    ```
 
-4. **Access the Application**
-   - Frontend: http://localhost:3000
-   - Backend API: http://localhost:8000
-   - Admin Dashboard: http://localhost:3000/admin
+#### Frontend Setup
 
-## 📁 Project Structure
+1. **Navigate to frontend directory**
+   ```bash
+   cd frontend
+   ```
 
-```
-dr_ajay/
-├── frontend/                 # Next.js frontend application
-│   ├── src/
-│   │   ├── components/      # React components
-│   │   ├── pages/          # Next.js pages
-│   │   ├── styles/         # CSS styles
-│   │   └── utils/          # Utility functions
-│   ├── public/             # Static assets
-│   ├── env.template        # Environment variables template
-│   └── package.json        # Dependencies
-├── backend/                 # Django/FastAPI backend
-│   ├── api/                # API endpoints
-│   ├── models/             # Database models
-│   ├── serializers/        # API serializers
-│   ├── views/              # API views
-│   ├── env.template        # Environment variables template
-│   └── requirements.txt    # Python dependencies
-├── optimize_memory.sh      # Memory optimization script
-├── server_management.md    # Server management guide
-├── .gitignore             # Git ignore rules
-└── README.md              # This file
-```
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
 
-## ⚙️ Configuration
+3. **Environment configuration**
+   ```bash
+   # For development
+   cp env.development .env.local
+   
+   # For production
+   cp env.production .env.production
+   # Then update with your production values
+   ```
 
-### Frontend Environment Variables
+4. **Run development server**
+   ```bash
+   npm run dev
+   ```
 
-Copy `frontend/env.template` to `frontend/.env.local` and configure:
+5. **Build for production**
+   ```bash
+   npm run build
+   npm start
+   ```
 
-```bash
-# Required
-NEXT_PUBLIC_BACKEND_URL=http://localhost:8000
-NEXT_PUBLIC_APP_NAME="Dr. Ajay Medical Practice"
-
-# Optional
-NEXT_PUBLIC_CONTACT_EMAIL=info@drajay.com
-NEXT_PUBLIC_CONTACT_PHONE=+1-234-567-8900
-```
+## 🌐 Environment Configuration
 
 ### Backend Environment Variables
 
-Copy `backend/env.template` to `backend/.env` and configure:
+**Critical production variables to update:**
+- `SECRET_KEY`: Django secret key (50+ characters)
+- `DATABASE_URL`: Production database connection
+- `ALLOWED_HOSTS`: Your domain names
+- `CORS_ALLOWED_ORIGINS`: Frontend domain URLs
+- `EMAIL_*`: Email service configuration
 
-```bash
-# Required
-SECRET_KEY=your-secret-key
-DATABASE_URL=postgresql://user:password@localhost:5432/dr_ajay_db
-ALLOWED_HOSTS=localhost,127.0.0.1,your-domain.com
+### Frontend Environment Variables
 
-# Email (Optional)
-EMAIL_HOST_USER=your-email@gmail.com
-EMAIL_HOST_PASSWORD=your-app-password
+**Critical production variables to update:**
+- `NEXT_PUBLIC_BACKEND_URL`: Backend API URL
+- `NEXTAUTH_URL`: Frontend domain URL
+- `NEXT_PUBLIC_CONTACT_*`: Real contact information
+- `NEXT_PUBLIC_DOMAIN`: Your domain name
+
+## 📦 Project Structure
+
 ```
+Dr.-Ajay-Krishna-Murthy/
+├── backend/                    # Django backend
+│   ├── appointment/           # Appointment management app
+│   ├── config/               # Django settings
+│   ├── requirements.txt      # Python dependencies
+│   ├── env.production        # Production environment template
+│   └── env.development       # Development environment template
+├── frontend/                  # Next.js frontend
+│   ├── src/                  # Source code
+│   │   ├── app/             # Next.js app router
+│   │   └── components/      # React components
+│   ├── package.json         # Node.js dependencies
+│   ├── env.production       # Production environment template
+│   └── env.development      # Development environment template
+├── deploy.sh                 # Automated deployment script
+└── README.md                # This file
+```
+
+## 🔒 Security Features
+
+- HTTPS enforcement in production
+- CORS protection
+- CSRF protection
+- Security headers
+- Environment variable management
+- SQL injection protection
+- XSS protection
 
 ## 🚀 Production Deployment
 
-### Environment Setup
+### Option 1: Using Deploy Script
+```bash
+./deploy.sh production
+```
 
-1. **Server Requirements**
-   - Ubuntu 20.04+ or similar
-   - 2GB+ RAM (1GB minimum with optimization)
-   - 20GB+ storage
-   - Python 3.8+, Node.js 18+, PostgreSQL 12+
+### Option 2: Manual Production Setup
 
-2. **Environment Configuration**
+1. **Server Setup**
+   - Ubuntu/CentOS server
+   - Python 3.8+, Node.js 18+
+   - PostgreSQL database
+   - Nginx web server
+
+2. **Backend Deployment**
    ```bash
-   # Production frontend
-   cp frontend/env.template frontend/.env.production
-   
-   # Production backend
-   cp backend/env.template backend/.env
+   cd backend
+   source venv_prod/bin/activate
+   gunicorn config.wsgi:application
    ```
 
-3. **Build for Production**
+3. **Frontend Deployment**
    ```bash
-   # Frontend
    cd frontend
    npm run build
    npm start
-   
-   # Backend
-   cd backend
-   python manage.py collectstatic
-   python manage.py migrate
-   gunicorn myproject.wsgi:application
    ```
 
-### Nginx Configuration
+4. **Nginx Configuration** (example)
+   ```nginx
+   server {
+       listen 80;
+       server_name your-domain.com;
+       
+       location / {
+           proxy_pass http://localhost:3000;
+       }
+       
+       location /api/ {
+           proxy_pass http://localhost:8000;
+       }
+   }
+   ```
 
-```nginx
-server {
-    listen 80;
-    server_name your-domain.com;
-    
-    # Frontend
-    location / {
-        proxy_pass http://localhost:3000;
-        proxy_http_version 1.1;
-        proxy_set_header Upgrade $http_upgrade;
-        proxy_set_header Connection 'upgrade';
-        proxy_set_header Host $host;
-        proxy_cache_bypass $http_upgrade;
-    }
-    
-    # Backend API
-    location /api/ {
-        proxy_pass http://localhost:8000;
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header X-Forwarded-Proto $scheme;
-    }
-    
-    # Static files
-    location /static/ {
-        alias /var/www/dr_ajay/static/;
-    }
-    
-    location /media/ {
-        alias /var/www/dr_ajay/media/;
-    }
-}
-```
+## 🧪 Development
 
-### SSL Configuration
+### Development Servers
+- Backend: http://localhost:8000
+- Frontend: http://localhost:3000
+- Admin Dashboard: http://localhost:3000/admin (protected)
+- Admin Login: http://localhost:3000/login
+
+### Default Admin Credentials (Development)
+- Username: `admin`
+- Password: `admin123`
+- **⚠️ Change these in production!**
+
+### Key Commands
 
 ```bash
-# Install Certbot
-sudo apt install certbot python3-certbot-nginx
-
-# Get SSL certificate
-sudo certbot --nginx -d your-domain.com
-
-# Auto-renewal
-sudo crontab -e
-# Add: 0 12 * * * /usr/bin/certbot renew --quiet
-```
-
-## 🛠️ Development
-
-### Running Tests
-
-```bash
-# Frontend tests
-cd frontend
-npm test
-
-# Backend tests
-cd backend
-python manage.py test
-```
-
-### Code Quality
-
-```bash
-# Frontend linting
-cd frontend
-npm run lint
-npm run lint:fix
-
-# Backend linting
-cd backend
-flake8 .
-black .
-```
-
-### Database Management
-
-```bash
-# Create migration
+# Backend
 python manage.py makemigrations
-
-# Apply migrations
 python manage.py migrate
+python manage.py runserver
+python manage.py test
 
-# Create superuser
-python manage.py createsuperuser
-
-# Database backup
-pg_dump dr_ajay_db > backup.sql
-
-# Database restore
-psql dr_ajay_db < backup.sql
+# Frontend
+npm run dev
+npm run build
+npm run start
+npm run lint
 ```
 
-## 🔧 Small Server Optimization
+## 📚 API Documentation
 
-For servers with limited memory (like 1GB RAM):
+The backend provides REST API endpoints for:
+- Appointment management
+- Admin operations
+- Health checks
 
-1. **Use the optimization script**
-   ```bash
-   ./optimize_memory.sh
-   ```
-
-2. **Monitor memory usage**
-   ```bash
-   free -h
-   htop
-   ```
-
-3. **Manage Cursor AI usage**
-   ```bash
-   # Close Cursor when not actively coding
-   pkill -f cursor
-   
-   # Kill TypeScript servers
-   pkill -f tsserver
-   ```
-
-4. **Read the server management guide**
-   ```bash
-   cat server_management.md
-   ```
-
-## 📊 API Documentation
-
-### Appointment Endpoints
-
-- `GET /api/appointments/` - List all appointments
-- `POST /api/appointments/` - Create new appointment
-- `GET /api/appointments/{id}/` - Get appointment details
-- `PUT /api/appointments/{id}/` - Update appointment
-- `DELETE /api/appointments/{id}/` - Delete appointment
-- `GET /api/appointments/stats/` - Get appointment statistics
-
-### Request/Response Examples
-
-```javascript
-// Create appointment
-POST /api/appointments/
-{
-  "name": "John Doe",
-  "email": "john@example.com",
-  "phone": "+1234567890",
-  "date": "2024-01-15",
-  "time": "10:00",
-  "message": "Regular checkup"
-}
-
-// Response
-{
-  "success": true,
-  "appointment": {
-    "id": 1,
-    "name": "John Doe",
-    "status": "pending",
-    "created_at": "2024-01-01T10:00:00Z"
-  }
-}
-```
-
-## 🐛 Troubleshooting
-
-### Common Issues
-
-1. **Memory crashes on small server**
-   ```bash
-   ./optimize_memory.sh
-   pkill -f cursor
-   ```
-
-2. **Frontend build errors**
-   ```bash
-   cd frontend
-   rm -rf .next node_modules
-   npm install
-   npm run build
-   ```
-
-3. **Database connection errors**
-   ```bash
-   # Check PostgreSQL status
-   sudo systemctl status postgresql
-   
-   # Restart if needed
-   sudo systemctl restart postgresql
-   ```
-
-4. **Port already in use**
-   ```bash
-   # Find process using port
-   lsof -i :3000
-   lsof -i :8000
-   
-   # Kill process
-   kill -9 <PID>
-   ```
+Visit `/admin/` for the Django admin interface.
 
 ## 🤝 Contributing
 
 1. Fork the repository
-2. Create a feature branch: `git checkout -b feature-name`
-3. Make your changes
-4. Run tests: `npm test` and `python manage.py test`
-5. Commit changes: `git commit -am 'Add feature'`
-6. Push to branch: `git push origin feature-name`
-7. Submit a Pull Request
+2. Create feature branch
+3. Make changes
+4. Test thoroughly
+5. Submit pull request
 
 ## 📄 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🔗 Links
-
-- **Live Demo**: https://your-domain.com
-- **API Documentation**: https://your-domain.com/api/docs/
-- **Support**: info@drajay.com
+This project is proprietary software for Dr. Ajay Krishna Murthy's medical practice.
 
 ## 📞 Support
 
-For support and questions:
-- Email: info@drajay.com
-- Phone: +1-234-567-8900
-- GitHub Issues: [Create an issue](https://github.com/yourusername/dr_ajay/issues)
+For technical support or deployment assistance, please contact the development team.
 
 ---
 
-**Made with ❤️ for Dr. Ajay Medical Practice** 
+**⚠️ Important Production Notes:**
+- Always update environment files with real production values
+- Use strong, unique passwords and secret keys
+- Set up SSL certificates for HTTPS
+- Configure proper database backups
+- Monitor application logs and performance
+- Follow security best practices 
