@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 interface Appointment {
   id: number;
@@ -32,12 +32,7 @@ export default function AdminDashboard() {
 
   const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://127.0.0.1:8000';
 
-  useEffect(() => {
-    fetchAppointments();
-    fetchStats();
-  }, []);
-
-  const fetchAppointments = async () => {
+  const fetchAppointments = useCallback(async () => {
     try {
       const response = await fetch(`${backendUrl}/api/appointments/`);
       const data = await response.json();
@@ -49,9 +44,9 @@ export default function AdminDashboard() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [backendUrl]);
 
-  const fetchStats = async () => {
+  const fetchStats = useCallback(async () => {
     try {
       const response = await fetch(`${backendUrl}/api/appointments/stats/`);
       const data = await response.json();
@@ -61,7 +56,12 @@ export default function AdminDashboard() {
     } catch (error) {
       console.error('Error fetching stats:', error);
     }
-  };
+  }, [backendUrl]);
+
+  useEffect(() => {
+    fetchAppointments();
+    fetchStats();
+  }, [fetchAppointments, fetchStats]);
 
   const updateAppointmentStatus = async (appointmentId: number, status: string) => {
     try {
@@ -82,6 +82,7 @@ export default function AdminDashboard() {
         alert('Error updating appointment: ' + data.error);
       }
     } catch (error) {
+      console.error('Error updating appointment:', error);
       alert('Error updating appointment');
     }
   };
@@ -103,6 +104,7 @@ export default function AdminDashboard() {
         alert('Error deleting appointment: ' + data.error);
       }
     } catch (error) {
+      console.error('Error deleting appointment:', error);
       alert('Error deleting appointment');
     }
   };
