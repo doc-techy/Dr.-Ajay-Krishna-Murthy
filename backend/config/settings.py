@@ -48,7 +48,7 @@ else:
 DEBUG = ENV_CONFIG['app']['debug']
 
 # ALLOWED_HOSTS - Updated for production domain
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '0.0.0.0', '65.0.97.115']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '0.0.0.0', '65.0.97.115', '192.168.29.189']
 if APP_ENVIRONMENT == 'production':
     ALLOWED_HOSTS.extend(['oculoplastix.in', 'www.oculoplastix.in'])
 
