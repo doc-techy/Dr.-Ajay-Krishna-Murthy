@@ -25,9 +25,9 @@ const nextConfig: NextConfig = {
   },
 
   // Experimental features for better performance
-  experimental: {
-    optimizeCss: true,
-  },
+  // experimental: {
+  //   optimizeCss: true, // Temporarily disabled due to critters dependency issue
+  // },
 
   // Headers for security
   async headers() {
