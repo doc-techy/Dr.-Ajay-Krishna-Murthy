@@ -11,8 +11,8 @@
         "name": "ajay_db",
         "host": "localhost",
         "port": 5432,
-        "user": "dietailor_admin",
-        "password": "dietailor2025"
+        "user": "admin",
+        "password": "admin@123"
       },
       "frontend": {
         "url": "http://localhost:3000",
