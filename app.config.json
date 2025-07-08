@@ -7,12 +7,12 @@
         "timeout": 30000
       },
       "database": {
-        "engine": "sqlite",
-        "name": "db.sqlite3",
+        "engine": "postgresql",
+        "name": "ajay_db",
         "host": "localhost",
-        "port": null,
-        "user": null,
-        "password": null
+        "port": 5432,
+        "user": "dietailor_admin",
+        "password": "dietailor2025"
       },
       "frontend": {
         "url": "http://localhost:3000",
@@ -37,27 +37,26 @@
       },
       "admin": {
         "username": "admin",
-        "password": "admin123",
-        "note": "Change these credentials in production!"
+        "password": "admin123"
       }
     },
     "production": {
       "backend": {
-        "url": "https://api.your-domain.com",
+        "url": "http://65.0.97.115",
         "apiVersion": "v1",
         "timeout": 30000
       },
       "database": {
         "engine": "postgresql",
-        "name": "dr_ajay_production",
-        "host": "your-db-host.com",
+        "name": "ajay_db",
+        "host": "localhost",
         "port": 5432,
-        "user": "production_user",
-        "password": "UPDATE_WITH_SECURE_PASSWORD"
+        "user": "dietailor_admin",
+        "password": "dietailor2025"
       },
       "frontend": {
-        "url": "https://www.your-domain.com",
-        "port": 443
+        "url": "http://65.0.97.115:3000",
+        "port": 3000
       },
       "app": {
         "name": "Dr. Ajay Krishna Murthy - Medical Practice",
@@ -72,14 +71,13 @@
         "emergencyPhone": "+91-XXXXXXXXXX"
       },
       "security": {
-        "corsOrigins": ["https://www.your-domain.com", "https://your-domain.com"],
-        "httpsRedirect": true,
+        "corsOrigins": ["http://65.0.97.115:3000", "http://65.0.97.115"],
+        "httpsRedirect": false,
         "sessionTimeout": 3600
       },
       "admin": {
-        "username": "CHANGE_THIS_USERNAME",
-        "password": "CHANGE_THIS_SECURE_PASSWORD",
-        "note": "IMPORTANT: Use strong credentials and implement proper authentication!"
+        "username": "admin",
+        "password": "admin123"
       }
     }
   },
